@@ -1,7 +1,11 @@
-    const container = document.querySelector('#container');
+const container = document.querySelector('#container');
 const buttonGrid = document.querySelector('#buttonGrid')
+const buttonRainbow = document.querySelector('#buttonRainbow')
+const buttonBlack = document.querySelector('#buttonBlack')
+const buttonReset = document.querySelector('#buttonReset')
 let userInput = 16
 let totalSquares = userInput * userInput
+let buttonRainbowPressed = 0
 
 createSquares()
 
@@ -15,8 +19,22 @@ function createSquares(){
         container.appendChild(content);
 
         content.addEventListener('mouseover',function(){
-        content.style.backgroundColor="red";
+
+
+        if (buttonRainbowPressed === 1){
+        content.style.setProperty('background-color', randomRGB())
+        } else { content.style.backgroundColor="black";}
         });
+        buttonBlack.addEventListener('click', function(){
+            buttonRainbowPressed = 0
+            buttonBlack.style.cssText = "box-shadow: 0px 0px 15px 5px orange;"
+            buttonRainbow.style.cssText = ""
+            
+            // if (typeof content !== 'undefined') {
+            //     content.style.backgroundColor="white";
+            // }
+            
+        })
     }
 }
 
@@ -41,3 +59,25 @@ container.style.setProperty('grid-template-columns', 'repeat(' + userInput + ', 
 }
 
 
+function randomRGB(){
+    function randomNumber(){
+      return Math.floor(Math.random()*255);
+    }
+    let r = randomNumber()
+    let g = randomNumber()
+    let b = randomNumber()
+    let rgb = `rgb(${r},${g},${b})`
+    return rgb
+}
+
+
+buttonRainbow.addEventListener('click', function(){
+    buttonRainbowPressed = 1
+    buttonRainbow.style.cssText = "box-shadow: 0px 0px 15px 5px orange;"
+    buttonBlack.style.cssText = ""
+})
+
+
+buttonReset.addEventListener('click', function(){
+    document.location.reload()
+})
