@@ -35,6 +35,11 @@ body{
     background: black;
 }
 
+.eraser{
+    background: white;
+    color: black
+}
+
 .buttonGrid:hover{
     box-shadow: 0px 0px 10px 2px orange;
 }
