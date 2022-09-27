@@ -4,15 +4,23 @@ const buttonRainbow = document.querySelector('#buttonRainbow')
 const buttonBlack = document.querySelector('#buttonBlack')
 const buttonEraser = document.querySelector('#buttonEraser')
 const buttonReset = document.querySelector('#buttonReset')
-let userInput = 16
+const slider = document.querySelector('#gridSlider');
+const gridSize = document.querySelector('#gridSize');
+let userInput = parseInt(slider.value)
 let totalSquares = userInput * userInput
 let buttonRainbowPressed = 0
 let buttonEraserPressed = 0
+
+// Update the current slider value (each time you drag the slider handle)
+slider.oninput = function() {
+  console.log(slider.value)
+}
 
 createSquares()
 
 function createSquares(){
   removeSquares()
+  gridSize.textContent = userInput + ' X ' + userInput ;
   for(let i=0; i< totalSquares; i++){
     let content = document.createElement('div');
     content.classList.add('content');
@@ -30,15 +38,24 @@ function createSquares(){
   }
 }
 
-buttonGrid.addEventListener('click', function(){
-  userInputString = prompt('Number of squares per side?')
-  if (userInputString > 0 && userInputString < 51){
-      userInput = parseInt(userInputString);
+slider.addEventListener('click', function(){
+  if (userInput !== parseInt(slider.value)){
+      userInput = parseInt(slider.value);
       totalSquares = userInput * userInput
       createSquares()
       gridTemplate()
-  } else userInputString = alert('Please select a number between 1-50')
+  }
 })
+
+// buttonGrid.addEventListener('click', function(){
+//   userInputString = prompt('Number of squares per side?')
+//   if (userInputString > 0 && userInputString < 51){
+//       userInput = parseInt(userInputString);
+//       totalSquares = userInput * userInput
+//       createSquares()
+//       gridTemplate()
+//   } else userInputString = alert('Please select a number between 1-50')
+// })
 
 function removeSquares() {
   while(container.firstChild) {
